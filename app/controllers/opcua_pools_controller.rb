@@ -1,0 +1,2 @@
+class OpcuaPoolsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class OpcuaPool < ApplicationRecord
+end
