@@ -1,0 +1,54 @@
+
+
+
+
+
+
+
+<div class="table-responsive-md p-3">
+  <table class="table table-striped
+  table-hover	
+  table-borderless
+  table-success
+  align-middle">
+    <thead class="table-light">
+      <caption></caption>
+      <tr>
+        <th>#</th>
+        <th>value</th>
+        <th>name</th>
+        <th>Random</th>
+        <th>Bool</th>
+      </tr>
+      </thead>
+      <tbody class="table-group-divider">
+      <% @opc_values.each do |opcvalue| %>
+        <tr class="table-light" >
+          <td scope="row"><%= opcvalue.value %></td>
+          <td><%= opcvalue.name %></td>
+          <td>Item</td>
+          <td>Item</td>
+          <td>Item</td>
+        </tr>
+      <% end %>
+
+      </tbody>
+      <tfoot>
+        
+      </tfoot>
+  </table>
+</div>
+
+
+<div class="card text-center">
+
+  <div class="card-body">
+    <% @array_value.each do |value|  %>
+    <h4 class="card-title"><%= value[0] %></h4>
+    <h4 class="card-title"><%= value[1] %></h4>
+
+
+    <% end %>
+
+  </div>
+</div>

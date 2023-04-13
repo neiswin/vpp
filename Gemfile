@@ -33,6 +33,7 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis"
 gem "sidekiq", "~> 7.0.8"
+gem 'opcua_client'
 
 
 

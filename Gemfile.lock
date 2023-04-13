@@ -129,6 +129,7 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
+    opcua_client (0.0.5)
     pg (1.4.6)
     public_suffix (5.0.1)
     puma (5.6.5)
@@ -164,7 +165,8 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
-    redis (4.8.1)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
     redis-client (0.14.1)
       connection_pool
     regexp_parser (2.7.0)
@@ -225,6 +227,7 @@ DEPENDENCIES
   debug
   jbuilder
   jsbundling-rails
+  opcua_client
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
