@@ -1,39 +1,46 @@
 require 'opcua_client'
 require 'pg'
 
+
+
+
+
+
 class PollopcJob
   include Sidekiq::Job
+
+  class OpcuaPooling
+    def initialize
+      @opcua_client = OPCUAClient::Client.new
+      @opcua_client.connect("opc.tcp://127.0.0.1:55000") 
+      @db = PG.connect(dbname: 'vpp_development', user: 'vpp', password: '112131')
+    end
+
+    def read_and_write_to_database
+      values_to_write = {}
+      @opcua_client.with_session do |session|
+        # Читаем необходимые значения с OPC UA сервера
+        values_to_write[:value1] = session.read('ns=2;s=OPCDACLIENT.opcdaclient.Random.PsFloat1').value
+        values_to_write[:value2] = session.read('ns=2;s=OPCDACLIENT.opcdaclient.Sinusoid.PsFloat1').value
+        # values_to_write[:value3] = session.read('ns=2;s=value3').value
+      end
+      
+      # Записываем значения в базу данных PostgreSQL
+      @db.exec_params("INSERT INTO opcua_pools(value1, value2) VALUES ($1, $2)", [values_to_write[:value1], values_to_write[:value2]])
+    end
+  end
 
   def perform(*args)
     puts 'OPC Pool Start'
     sleep(2)
     # client = OPCUAClient::Client.new
 
-
-    class OpcuaPool
-      def initialize
-        @opcua_client = OPCUAClient::Client.new
-        @opcua_client.connect("opc.tcp://127.0.0.1:55000") 
-        @db = PG.connect(dbname: 'vpp_development', user: 'vpp', password: '112131')
-      end
   
-      def read_and_write_to_database
-        values_to_write = {}
-        @opcua_client.with_session do |session|
-          # Читаем необходимые значения с OPC UA сервера
-          values_to_write[:value1] = session.read('ns=2;s=OPCDACLIENT.opcdaclient.Random.PsFloat1').value
-          values_to_write[:value2] = session.read('ns=2;s=OPCDACLIENT.opcdaclient.Sinusoid.PsFloat1').value
-          # values_to_write[:value3] = session.read('ns=2;s=value3').value
-        end
-        
-        # Записываем значения в базу данных PostgreSQL
-        @db.exec_params("INSERT INTO opcua_pools(value1, value2) VALUES ($1, $2)", [values_to_write[:value1], values_to_write[:value2]])
-      end
-    end
 
 
 
-    opcuatopostgresql = OpcuaPool.new
+
+    opcuatopostgresql = OpcuaPooling.new
     opcuatopostgresql.read_and_write_to_database
     puts 'OPC Pool end'
   end

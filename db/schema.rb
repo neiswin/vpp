@@ -10,15 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_13_085803) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_083823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "opcua_pools", force: :cascade do |t|
+  create_table "signal_names", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "signal_values", force: :cascade do |t|
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "signal_name_id"
+    t.index ["signal_name_id"], name: "index_signal_values_on_signal_name_id"
   end
 
+  add_foreign_key "signal_values", "signal_names"
 end

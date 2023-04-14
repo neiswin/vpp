@@ -1,6 +1,6 @@
 require "test_helper"
 
-class OpcuaPoolTest < ActiveSupport::TestCase
+class SignalNameTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

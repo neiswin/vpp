@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+SignalName.create name: "Random"
+SignalName.create name: "Sinusoid"
+SignalName.create name: "Static"
+SignalName.create name: "RandomBoolean"
