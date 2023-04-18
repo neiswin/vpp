@@ -1,3 +1,3 @@
 class SignalValue < ApplicationRecord
-  belongs_to :signal_name
+  has_many :realtimes, dependent: :destroy
 end

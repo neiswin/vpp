@@ -1,0 +1,3 @@
+class RealtimeValues < ApplicationController
+  
+end

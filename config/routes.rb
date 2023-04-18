@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   root "pages#index"
 
   get "/values", to: "signal_values#index"
+
+
+  resources :realtime_values
 end

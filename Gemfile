@@ -34,7 +34,8 @@ gem "jbuilder"
 gem "redis"
 gem "sidekiq", "~> 7.0.8"
 gem 'opcua_client'
-
+gem "chartkick"
+gem "groupdate"
 
 
 

@@ -1,1 +1,30 @@
 <h1 class="display-4">Hello values</h1>
+
+<div class="table-responsive-md">
+  <table class="table table-light">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">type</th>
+        <th scope="col">value</th>
+        <th scope="col">created_at</th>
+      </tr>
+    </thead>
+    <tbody>
+<% @opcvalues.each do |opc| %>
+      <tr class="">
+        <td scope="row"><%= opc.id %></td>
+        <td><%= opc.type_value %></td>
+        <td><%= opc.value %></td>
+        <td><%= opc.created_at %></td>
+      </tr>
+<% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="container-fluid my-3 p-3">
+<%= area_chart SignalValue.group_by_minute(:created_at, range: 1.hour.ago..).average(:value) %>
+</div>
