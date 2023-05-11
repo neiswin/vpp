@@ -10,17 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_18_180219) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_060934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "date_dictonaries", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.integer "week"
+    t.integer "day"
+    t.integer "hour"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "realtimes", force: :cascade do |t|
     t.string "name"
     t.string "value"
-    t.bigint "signal_value_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["signal_value_id"], name: "index_realtimes_on_signal_value_id"
   end
 
   create_table "signal_names", force: :cascade do |t|
@@ -32,7 +40,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_18_180219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type_value"
+    t.bigint "date_dictonaries_id"
+    t.index ["date_dictonaries_id"], name: "index_signal_values_on_date_dictonaries_id"
   end
 
-  add_foreign_key "realtimes", "signal_values"
+  add_foreign_key "signal_values", "date_dictonaries", column: "date_dictonaries_id"
 end

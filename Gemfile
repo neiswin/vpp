@@ -37,6 +37,10 @@ gem 'opcua_client'
 gem "chartkick"
 gem "groupdate"
 
+gem 'draper'
+
+gem 'google_charts'
+
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

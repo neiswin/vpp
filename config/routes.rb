@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get "/values", to: "signal_values#index"
 
+  get "/latest_value", to: "signal_values#latest_value"
 
-  resources :realtime_values
+
+  resources :realtimes, only: %i[index show]
 end

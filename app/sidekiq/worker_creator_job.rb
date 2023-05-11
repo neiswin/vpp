@@ -1,11 +1,12 @@
 class WorkerCreatorJob
   include Sidekiq::Job
+  
   PARAMS_MAPPING = [
-    { "value_path_on_opc": "OPCDACLIENT.opcdaclient.Sinusoid.PsFloat1",
-      "request_method": "read_float",
+    { "value_path_on_opc": "OPCDACLIENT.opcdaclient.Sinusoid.PsInteger1",
+      "request_method": "read_int32",
       "type_value": "Sinus"},
-    { "value_path_on_opc": "OPCDACLIENT.opcdaclient.Random.PsFloat1",
-      "request_method": "read_float",
+    { "value_path_on_opc": "OPCDACLIENT.opcdaclient.Random.PsInteger1",
+      "request_method": "read_int32",
       "type_value": "Random"}
  ]
  
@@ -16,7 +17,7 @@ class WorkerCreatorJob
     PARAMS_MAPPING.each do |request_params|
         RequestSignalWorkerJob.perform_async(request_params)
       end
-
+    sleep(5)
     WorkerCreatorJob.perform_async
   end
 end

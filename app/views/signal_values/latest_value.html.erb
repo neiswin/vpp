@@ -1,0 +1,7 @@
+<%= turbo_stream_from "signal_values" %>
+
+<div id="last-value">
+  <%= render partial: "value", locals: { value: @value } %>
+</div>
+
+<%= turbo_stream_action "signal_values.last_value", target: "last-value", track: "reload" %>

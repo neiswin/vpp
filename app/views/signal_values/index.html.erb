@@ -1,4 +1,7 @@
-<h1 class="display-4">Hello values</h1>
+<h1 class="display-4">Page values</h1>
+
+
+<h1 class="display-6 text-center">Turbo value test: <%= @turbo_value.value %></h1>
 
 <div class="table-responsive-md">
   <table class="table table-light">
@@ -24,7 +27,91 @@
 </div>
 
 
+<div class="container text-center my-3 p-3">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive-md">
+        <table class="table table-sm
+        table-hover	
+        table-borderless
+        table-light
+        align-middle">
+          <thead class="table-light">
+            <caption>Sinus</caption>
+            <tr>
+              <th>Value</th>
+              <th>Created</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <% @sinus.each do |sinus|  %>
+              <tr class="table-light" >
+                <td scope="row"><%= sinus.value %></td>
+                <td><%= sinus.created_at %></td>
+              </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <div class="container-fluid my-3 p-3">
+                <%= area_chart SignalValue.where(type_value: "Sinus").group_by_second(:created_at, range: 2.hour.ago..).average(:value) %>
+              </div>
 
-<div class="container-fluid my-3 p-3">
-<%= area_chart SignalValue.group_by_minute(:created_at, range: 1.hour.ago..).average(:value) %>
+            </tfoot>
+        </table>
+      </div>
+    
+
+    </div>
+    <div class="col">
+            <div class="table-responsive-md">
+        <table class="table table-sm
+        table-hover	
+        table-borderless
+        table-light
+        align-middle">
+          <thead class="table-light">
+            <caption>Random</caption>
+            <tr>
+              <th>Value</th>
+              <th>Created</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <% @randoms.each do |randoms|  %>
+              <tr class="table-light" >
+                <td scope="row"><%= randoms.value %></td>
+                <td><%= randoms.created_at %></td>
+              </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <div class="container-fluid my-3 p-3">
+                <%= area_chart SignalValue.where(type_value: "Random").group_by_minute(:created_at, range: 2.hour.ago..).average(:value) %>
+              </div>
+
+            </tfoot>
+        </table>
+      </div>
+  
+    </div>
+
 </div>
+
+
+<%= line_chart @data_chart %>
+
+
+
+<%= pie_chart @data_pie_chart, donut: true, dataset: {backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ]} %>
+
+
+
+
+
+
+
+<%= render '/signal_values/trends' %>

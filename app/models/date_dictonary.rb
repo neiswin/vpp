@@ -1,0 +1,2 @@
+class DateDictonary < ApplicationRecord
+end

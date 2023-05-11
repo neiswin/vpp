@@ -1,11 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-SignalName.create name: "Random"
-SignalName.create name: "Sinusoid"
-SignalName.create name: "Static"
-SignalName.create name: "RandomBoolean"
+# определяем дату, с которой начинается заполнение таблицы
+start_date = Date.today
+
+# определяем дату, на которую нужно заполнить таблицу
+end_date = start_date + 5.years
+
+# перебираем все даты в интервале от начальной до конечной
+(start_date..end_date).each do |date|
+  # перебираем все часы от 0 до 23 для данной даты
+  (0..23).each do |hour|
+    # создаем новую запись в таблице с данными для данной даты и часа
+    DateDictonary.create(
+      year: date.year,
+      month: date.month,
+      week: date.strftime('%U').to_i,
+      day: date.day,
+      hour: hour
+    )
+  end
+end
+
+puts 'done'

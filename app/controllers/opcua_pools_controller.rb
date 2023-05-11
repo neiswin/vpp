@@ -5,6 +5,9 @@ class OpcuaPoolsController < ApplicationController
     @opc_values = OpcuaPool.all
     @array_value = OpcuaPool.pluck(:name, :value)
 
+    debugger
+
+
 
     begin
       client = OPCUAClient::Client.new
