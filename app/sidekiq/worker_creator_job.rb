@@ -2,10 +2,10 @@ class WorkerCreatorJob
   include Sidekiq::Job
   
   PARAMS_MAPPING = [
-    { "value_path_on_opc": "OPCDACLIENT.opcdaclient.Sinusoid.PsInteger1",
+    { "value_path_on_opc": "OPCDA.client.Sinusoid.PsInteger1",
       "request_method": "read_int32",
       "type_value": "Sinus"},
-    { "value_path_on_opc": "OPCDACLIENT.opcdaclient.Random.PsInteger1",
+    { "value_path_on_opc": "OPCDA.client.Random.PsInteger1",
       "request_method": "read_int32",
       "type_value": "Random"}
  ]

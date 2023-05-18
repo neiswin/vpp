@@ -1,5 +1,6 @@
 class RequestSignalWorkerJob
   include Sidekiq::Job
+  require 'opcua_client'
 
   
   def perform(*args)

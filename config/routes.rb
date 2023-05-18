@@ -13,4 +13,11 @@ Rails.application.routes.draw do
 
 
   resources :realtimes, only: %i[index show]
+
+  # TelegramWebhooksController.action_path '/telegram/bot'
+
+
+  # TelegramBotController.draw do
+  #   telegram_webhooks TelegramBotController
+  # end
 end

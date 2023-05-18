@@ -43,6 +43,13 @@ gem 'google_charts'
 
 
 
+gem 'telegram-bot-ruby'
+
+gem 'telegram-bot'
+# gem 'telegram-bot-rails'
+
+
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
